@@ -29,8 +29,9 @@ public class BlueprintsServices {
         
     }
     
-    public Set<Blueprint> getAllBlueprints(){
-        return null;
+    public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException{
+
+        return bpp.getAllBlueprints();
     }
     
     /**
@@ -55,10 +56,8 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
-        
-        
-        
-        throw new UnsupportedOperationException("Not supported yet."); 
+   
+        return bpp.getBlueprintsByAuthor(author);
     }
     
 }

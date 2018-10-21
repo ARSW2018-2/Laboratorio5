@@ -22,6 +22,8 @@ public interface BlueprintsPersistence {
      */
     public void saveBlueprint(Blueprint bp) throws BlueprintPersistenceException;
     
+    
+    
     /**
      * 
      * @param author blueprint's author
@@ -39,6 +41,8 @@ public interface BlueprintsPersistence {
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException;
+    
+    public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException;
     
     
 }

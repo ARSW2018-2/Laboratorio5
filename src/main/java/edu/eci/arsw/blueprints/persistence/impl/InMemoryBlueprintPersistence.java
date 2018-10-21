@@ -10,8 +10,12 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.stereotype.Service;
@@ -28,7 +32,9 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
     public InMemoryBlueprintPersistence() {
         //load stub data
         Point[] pts=new Point[]{new Point(140, 140),new Point(115, 115)};
+        
         Blueprint bp=new Blueprint("_authorname_", "_bpname_ ",pts);
+        
         blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
         
     }    
@@ -50,16 +56,30 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     @Override
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException {
+        List<Blueprint> valorResp=new ArrayList<Blueprint>(blueprints.values());
         Set<Blueprint> respuesta= new HashSet<Blueprint>();
-        for(int i=0; i<blueprints.size();i++){
-            //blueprints
         
-        }
+        for(int i=0;i<valorResp.size();i++){
+            Blueprint p= valorResp.get(i);
+            if(p.getAuthor().equalsIgnoreCase(author)){
+                System.out.println("LOGRADO");
+            
+                respuesta.add(p);
+            }
+        }        
         
-        //Revisar
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("que tamaño devuelve"+respuesta.size());
+        return respuesta;
     }
 
-    
-    
+    @Override
+    public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
+        List<Blueprint> valorResp=new ArrayList<Blueprint>(blueprints.values());
+        Set<Blueprint> respuesta= new HashSet<Blueprint>(); 
+        for(int i=0;i<valorResp.size();i++){
+            Blueprint p= valorResp.get(i);
+            respuesta.add(p);
+        }
+        return respuesta;
+    }
 }
